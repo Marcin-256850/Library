@@ -1,2 +1,2 @@
 # Library
-## A simple example of using classes in Python
+A simple example of using classes in Python
