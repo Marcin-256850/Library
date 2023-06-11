@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wyszukiwarka książek</title>
+</head>
+<body>
+    <h1>Wyszukiwarka książek</h1>
+
+    <form method="POST" action="/search">
+        <input type="text" name="search_value" placeholder="Wyszukaj...">
+        <button type="submit">Szukaj</button>
+    </form>
+
+    {% if search_value %}
+        <h2>Wyniki wyszukiwania:</h2>
+        {% if books %}
+            {% for book in books %}
+                <p>
+                <strong>Tytuł:</strong> {{ book[0] }}<br>
+                <strong>Autorzy:</strong> {{ book[1] }}<br>
+                <strong>Kategoria:</strong> {{ book[2] }}<br>
+                <strong>Dostępna ilość:</strong> {{ book[3] }}<br>
+                <strong>Data publikacji:</strong> {{ book[4] }}
+                </p>
+                {% if book[3] > 0 %}
+                    <form method="POST" action="/borrow">
+                        <input type="hidden" name="book_id" value="{{ book[5] }}">
+                        <button type="submit">Wypożycz</button>
+                    </form>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <p>Nie posiadamy takiej książki.</p>
+        {% endif %}
+    {% endif %}
+</body>
+</html>

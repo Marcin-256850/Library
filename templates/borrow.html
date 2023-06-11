@@ -1,0 +1,30 @@
+<h2>Wypożyczenia</h2>
+{% for borrow in history %}
+  <table>
+    <tr>
+      <th>ID wypożyczenia:</th>
+      <td>{{ borrow[0] }}</td>
+    </tr>
+    <tr>
+      <th>Data wypożyczenia:</th>
+      <td>{{ borrow[1] }}</td>
+    </tr>
+    <tr>
+      <th>Data zwrotu:</th>
+      <td>
+        {% if borrow[2] %}
+          {{ borrow[2] }}
+        {% else %}
+          <form action="{{ url_for('return_book', borrow_id=borrow[0]) }}" method="post">
+            <button type="submit">Oddaj książkę</button>
+          </form>
+        {% endif %}
+      </td>
+    </tr>
+    <tr>
+      <th>Tytuł książki:</th>
+      <td>{{ borrow[3] }}</td>
+    </tr>
+  </table>
+  <br>
+{% endfor %}
